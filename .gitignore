@@ -1,0 +1,31 @@
+# Claude Code local settings (may contain API keys)
+.claude/settings.local.json
+
+# Unity generated files
+hd2d-rpg/Library/
+hd2d-rpg/Temp/
+hd2d-rpg/Logs/
+hd2d-rpg/obj/
+hd2d-rpg/Build/
+hd2d-rpg/Builds/
+hd2d-rpg/UserSettings/
+hd2d-rpg/*.suo
+hd2d-rpg/*.user
+hd2d-rpg/*.pidb
+hd2d-rpg/*.booproj
+hd2d-rpg/*.svd
+hd2d-rpg/*.pdb
+hd2d-rpg/*.opendb
+hd2d-rpg/*.VC.db
+hd2d-rpg/[Aa]ssets/[Ss]treamingAssets/aa.meta
+hd2d-rpg/[Aa]ssets/[Aa]ddressable[Aa]ssets[Dd]ata/*/*.bin*
+hd2d-rpg/[Aa]ssets/[Ss]cenes/*.unity.autosave
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# OS
+.DS_Store
+Thumbs.db
