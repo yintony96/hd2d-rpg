@@ -61,7 +61,6 @@ namespace HD2DRPG
         {
             _activeMember = member;
             _enemies = enemies;
-            _selectedAction = 0;
             _boostLevel = 0;
 
             menuPanel.SetActive(true);
