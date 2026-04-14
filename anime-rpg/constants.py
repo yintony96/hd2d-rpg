@@ -62,6 +62,20 @@ COLOR_SKILL_BLUE  = ( 60, 140, 255)
 COLOR_SKILL_RED   = (255,  80,  80)
 COLOR_SKILL_GREEN = ( 80, 220, 100)
 
+# --- Genshin-inspired elemental palette ---
+COLOR_ANEMO       = ( 80, 230, 200)   # teal-green wind  (player element)
+COLOR_ANEMO_DARK  = ( 30, 130, 120)
+COLOR_PYRO        = (255, 120,  40)   # vivid orange fire
+COLOR_HYDRO       = ( 60, 160, 255)   # electric blue
+COLOR_ELECTRO     = (200,  80, 255)   # bright purple
+COLOR_CRYO        = (180, 230, 255)   # pale icy blue
+COLOR_GEO         = (230, 180,  50)   # warm golden
+COLOR_SHADOW      = ( 80,  20, 120)   # enemy dark element
+
+# --- UI glow / gradient helpers ---
+COLOR_GOLD_BRIGHT = (255, 230, 100)
+COLOR_PANEL_GRAD  = ( 18,  22,  55)   # inner panel gradient top
+
 # --- UI Geometry ---
 DIALOGUE_BOX_H    = 160
 DIALOGUE_PADDING  = 20

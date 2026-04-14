@@ -1,0 +1,17 @@
+{
+    "name": "HD2DRPG",
+    "rootNamespace": "HD2DRPG",
+    "references": [
+        "Unity.TextMeshPro",
+        "Unity.Cinemachine"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
