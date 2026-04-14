@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 using System.IO;
 
 namespace HD2DRPG.Editor
@@ -61,9 +62,11 @@ namespace HD2DRPG.Editor
 
             // Post-process volume placeholder
             var volumeGO = new GameObject("Post Processing Volume");
-            volumeGO.AddComponent<Volume>();
-            var profile = ScriptableObject.CreateInstance<VolumeProfile>();
+            var vol = volumeGO.AddComponent<UnityEngine.Rendering.Volume>();
+            vol.isGlobal = true;
+            var profile = ScriptableObject.CreateInstance<UnityEngine.Rendering.VolumeProfile>();
             AssetDatabase.CreateAsset(profile, "Assets/Settings/HubVolumeProfile.asset");
+            vol.sharedProfile = profile;
 
             EditorSceneManager.SaveScene(scene);
             Debug.Log("[HD2DRPG] Hub scene built. Add URP Bloom/DOF/ColorGrading to the Volume component.");
@@ -168,7 +171,7 @@ namespace HD2DRPG.Editor
             skill.mpCost       = 12;
             skill.bpCost       = 0;
             skill.element      = ElementType.Light;
-            skill.targetType   = TargetType.Single;
+            skill.targetType   = TargetType.SingleEnemy;
             skill.powerMultiplier = 1.5f;
             skill.hitCount     = 1;
             skill.shieldDamage = 1;
