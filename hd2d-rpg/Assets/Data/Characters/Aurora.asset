@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1a1a1a1a1a1a1a1a1a1a1a1a1a1a101, type: 3}
+  m_Name: Aurora
+  m_EditorClassIdentifier: HD2DRPG.CharacterData
+  characterName: Aurora
+  portrait: {fileID: 0}
+  battleSprite: {fileID: 0}
+  baseHP: 450
+  baseMP: 120
+  baseSTR: 28
+  baseDEF: 32
+  baseSPD: 24
+  baseMND: 22
+  hpGrowth: 0.08
+  mpGrowth: 0.05
+  strGrowth: 0.04
+  defGrowth: 0.05
+  spdGrowth: 0.03
+  mndGrowth: 0.04
+  innateWeaknesses:
+  - 5
+  innateResistances:
+  - 6
+  immunities: []
+  uniquePassives:
+  - Iron Will
+  - Aura of Protection
+  recruitCondition: Starting character
+  recruitCutscene:

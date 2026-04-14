@@ -1,0 +1,19 @@
+{
+    "name": "HD2DRPG.Editor",
+    "rootNamespace": "HD2DRPG.Editor",
+    "references": [
+        "HD2DRPG",
+        "Unity.TextMeshPro"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

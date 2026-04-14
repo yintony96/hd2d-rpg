@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4d4d4d4d4d4d4d4d4d4d4d4d4d4d401, type: 3}
+  m_Name: DivineGuard
+  m_EditorClassIdentifier: HD2DRPG.SkillData
+  skillName: Divine Guard
+  description: Apply a protective shield to all allies.
+  mpCost: 18
+  bpCost: 0
+  element: 6
+  targetType: 2
+  powerMultiplier: 0
+  hitCount: 1
+  shieldDamage: 0
+  boostedHitCount: 1
+  boostedPowerMultiplier: 0
+  guaranteedStatusOnBoost: 1
+  appliedEffects: []
+  statusChance: 1.0
+  isHealing: 0
+  healMultiplier: 0

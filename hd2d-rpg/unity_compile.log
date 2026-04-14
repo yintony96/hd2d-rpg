@@ -1,0 +1,181 @@
+[Licensing::Module] Trying to connect to existing licensing client channel...
+Built from '6000.4/staging' branch; Version is '6000.4.2f1 (7a4c1aeef971) revision 8014874'; Using compiler version '194234433'; Build Type 'Release'
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-User" at "2026-04-14T19:41:59.8525809Z"
+OS: 'Windows 11  (10.0.26200) Core' Language: 'fr' Physical Memory: 16154 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1
+System  architecture: x64
+Process architecture: x64
+Date: 2026-04-14T19:41:59Z
+
+COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\6000.4.2f1\Editor\Unity.exe
+-batchmode
+-quit
+-projectPath
+C:/Users/User/Documents/Claude Code Test/hd2d-rpg
+-logFile
+C:/Users/User/Documents/Claude Code Test/hd2d-rpg/unity_compile.log
+Successfully changed project path to: C:/Users/User/Documents/Claude Code Test/hd2d-rpg
+C:/Users/User/Documents/Claude Code Test/hd2d-rpg
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-temp-allocator-size-gfx=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-allocator-temp-initial-block-size-main=262144"
+    "memorysetup-allocator-temp-initial-block-size-worker=262144"
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+Player connection [36560]  Target information:
+
+Player connection [36560]  * "[IP] 192.168.1.180 [Port] 55504 [Flags] 2 [Guid] 2853618806 [EditorId] 2853618806 [Version] 1048832 [Id] WindowsEditor(7,WINDELL-MF37NPO) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+
+Player connection [36560] Host joined multi-casting on [225.0.0.222:54997]...
+Player connection [36560] Host joined alternative multi-casting on [225.0.0.222:34997]...
+Input System module state changed to: Initialized.
+[Physics::Module] Initialized fallback backend.
+[Physics::Module] Id: 0xdecafbad
+[Package Manager] Connected to IPC stream "Upm-31072" after 0.6 seconds.
+[Licensing::Module] Licensing is not yet initialized.
+[Licensing::Client] Error: HandshakeResponse reported an error:
+	ResponseCode: 505
+	ResponseStatus: Unsupported protocol version '1.18.1'.
+[Licensing::Module] Error: Failed to handshake to channel: "LicenseClient-User"
+[Licensing::IpcConnector] LicenseClient-User channel disconnected successfully.
+[Licensing::IpcConnector] Channel LicenseClient-User-6000.4.2 doesn't exist
+[Licensing::Module] Successfully launched the LicensingClient (PId: 35544)
+Starting IPC server.
+Waiting for clients to connect on \\.\pipe\Unity-LicenseClient-User-6000.4.2, press Ctrl-C to exit.
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-User-6000.4.2" at "2026-04-14T19:42:03.7404528Z"
+[Licensing::Client] Handshaking with LicensingClient:
+  Version:                 1.18.1+9fbee8e
+  Session Id:              afe080ce6c5b4432abfba19966250e99
+  Correlation Id:          2f1fd99ba3d3959b7ff6e456ea9d04c5
+  External correlation Id: 239475549821679993
+  Machine Id:              O2y6Y4znFIa25KgGhIrVoZV4o3U=
+[Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-User-6000.4.2" (connect: 1.29s, validation: 0.05s, handshake: 2.27s)
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-User-6000.4.2-notifications" at "2026-04-14T19:42:06.058908Z"
+[Licensing::Module] Connected to LicensingClient (PId: 35544, launch time: 0.02, total connection time: 3.60s)
+[Licensing::Module] Error: Access token is unavailable; failed to update
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] License group:
+  Id: 9072378873580-UnityPersXXXX
+  Product: Unity Personal
+  Type: Assigned
+  Expiration: Unlimited
+[Licensing::Client] Successfully updated license, isAsync: True, time: 0.01
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] Licensing Background thread has ended after 6.23s
+[Licensing::Module] Licensing is initialized (took 3.85s).
+[Licensing::Client] Successfully resolved entitlement details
+Library Redirect Path: Library/
+Rebuilding Library because the asset database could not be found!
+Unable to parse file ProjectSettings/TagManager.asset: [Parser Failure at line 41: Expect ':' between key and value within mapping]
+[Physics::Module] Selected backend.
+[Physics::Module] Name: PhysX
+[Physics::Module] Id: 0xf2b8ea05
+[Physics::Module] SDK Version: 4.1.2
+[Physics::Module] Integration Version: 1.0.0
+[Physics::Module] Threading Mode: Multi-Threaded
+Initialize engine version: 6000.4.2f1 (7a4c1aeef971)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/6000.4.2f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path C:/Users/User/Documents/Claude Code Test/hd2d-rpg/Assets
+GfxDevice: creating device client; kGfxThreadingModeNonThreaded
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce RTX 3060 Ti (ID=0x2486)
+    Vendor:   NVIDIA
+    VRAM:     8024 MB
+    Driver:   32.0.15.8195
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/6000.4.2f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/6000.4.2f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/6000.4.2f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56072
+CodeReloadManager initialized
+Using cacheserver namespaces - metadata:defaultmetadata, artifacts:defaultartifacts
+Using cacheserver namespaces - metadata:defaultmetadata, artifacts:defaultartifacts
+ImportWorker Server TCP listen port: 0
+AcceleratorClientConnectionCallback - disconnected - :0
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/6000.4.2f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
+Register platform support module: C:/Program Files/Unity/Hub/Editor/6000.4.2f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.540129 seconds.
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Package Manager log level set to [2]
+ScheduleIndexationOnStartup MainProcess:False IndexOnStartup:False
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.490 seconds
+Domain Reload Profiling: 4554ms
+	BeginReloadAssembly (535ms)
+		CreateAndSetChildDomain (7ms)
+	RebuildCommonClasses (715ms)
+	RebuildNativeTypeToScriptingClass (17ms)
+	initialDomainReloadingComplete (622ms)
+	LoadAllAssembliesAndSetupDomain (2172ms)
+		LoadAssemblies (539ms)
+		AnalyzeDomain (2148ms)
+			TypeCache.Refresh (2146ms)
+				TypeCache.ScanAssembly (1672ms)
+	FinalizeReload (494ms)
+		SetupLoadedEditorAssemblies (0ms)
+			InitializePlatformSupportModulesInManaged (53ms)
+			BeforeProcessingInitializeOnLoad (103ms)
+			ProcessInitializeOnLoadAttributes (124ms)
+			ProcessInitializeOnLoadMethodAttributes (130ms)
+[Licensing::Client] Successfully resolved entitlement details
+Application.AssetDatabase Initial Refresh Start
+Packages were changed.
+Update Mode: updateDependencies
+
+The following packages were added:
+  com.unity.2d.sprite@1.0.0
+  com.unity.ads@4.16.4
+  com.unity.analytics@3.8.2
+  com.unity.collab-proxy@2.12.4
+  com.unity.ide.rider@3.0.39
+  com.unity.ide.visualstudio@2.0.27
+  com.unity.modules.adaptiveperformance@1.0.0
+  com.unity.modules.vectorgraphics@1.0.0
+  com.unity.purchasing@4.15.0
+  com.unity.test-framework@1.6.0
+  com.unity.timeline@1.8.12
+  com.unity.xr.legacyinputhelpers@3.0.1
+  com.unity.ai.navigation@2.0.12
+  com.unity.modules.accessibility@1.0.0
+  com.unity.multiplayer.center@1.0.1
+The following packages were updated:
+  com.unity.render-pipelines.universal from version 17.0.3 to 17.4.0
+  com.unity.inputsystem from version 1.11.2 to 1.19.0
+  com.unity.2d.pixel-perfect from version 5.0.3 to 5.1.1
+  com.unity.postprocessing from version 3.4.0 to 3.5.4
+The following packages were removed:
+  com.unity.textmeshpro@3.2.0-pre.10
