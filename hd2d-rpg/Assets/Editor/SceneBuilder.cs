@@ -1,8 +1,6 @@
 using UnityEngine;
 using UnityEditor;
 using UnityEditor.SceneManagement;
-using UnityEngine.Rendering;
-using UnityEngine.Rendering.Universal;
 using System.IO;
 
 namespace HD2DRPG.Editor
@@ -60,13 +58,9 @@ namespace HD2DRPG.Editor
             towerGO.transform.position = new Vector3(10, 0, 0);
             hub.towerEntranceTrigger = towerGO.transform;
 
-            // Post-process volume placeholder
+            // Post-process volume (add Bloom/DOF/ColorGrading via Inspector after building)
             var volumeGO = new GameObject("Post Processing Volume");
-            var vol = volumeGO.AddComponent<UnityEngine.Rendering.Volume>();
-            vol.isGlobal = true;
-            var profile = ScriptableObject.CreateInstance<UnityEngine.Rendering.VolumeProfile>();
-            AssetDatabase.CreateAsset(profile, "Assets/Settings/HubVolumeProfile.asset");
-            vol.sharedProfile = profile;
+            // Volume component requires URP — add manually via Add Component > Rendering > Volume
 
             EditorSceneManager.SaveScene(scene);
             Debug.Log("[HD2DRPG] Hub scene built. Add URP Bloom/DOF/ColorGrading to the Volume component.");
