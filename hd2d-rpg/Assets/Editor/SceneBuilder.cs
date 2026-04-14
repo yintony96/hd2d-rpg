@@ -70,7 +70,7 @@ namespace HD2DRPG.Editor
             playerGO.tag = "Player";
             playerGO.transform.position = new Vector3(0, 0.5f, 0);
             var sr = playerGO.AddComponent<SpriteRenderer>();
-            sr.sprite        = CreatePlaceholderSprite(new Color(0.3f, 0.55f, 1f)); // blue = Aurora
+            sr.sprite        = LoadSprite("Assets/Art/Sprites/Characters/Aurora.png", new Color(0.3f, 0.55f, 1f));
             sr.sortingOrder  = 10;
             var rb = playerGO.AddComponent<Rigidbody2D>();
             rb.gravityScale  = 0;
@@ -306,14 +306,14 @@ namespace HD2DRPG.Editor
             SetColor(go, new Color(0.55f, 0.42f, 0.28f));
         }
 
-        static void CreateNPC(GameObject container, string npcName, Vector3 pos, Color color, string[] lines)
+        static void CreateNPC(GameObject container, string npcName, Vector3 pos, Color fallback, string[] lines)
         {
             var go = new GameObject(npcName);
             go.transform.SetParent(container.transform);
             go.transform.position = pos;
 
             var sr = go.AddComponent<SpriteRenderer>();
-            sr.sprite       = CreatePlaceholderSprite(color);
+            sr.sprite       = LoadSprite($"Assets/Art/Sprites/NPCs/{npcName}.png", fallback);
             sr.sortingOrder = 10;
 
             var npc = go.AddComponent<HubNPC>();
@@ -321,13 +321,17 @@ namespace HD2DRPG.Editor
             npc.dialogueLines = lines;
         }
 
-        static void CreateBattleCharacter(string charName, Vector3 pos, Color color)
+        static void CreateBattleCharacter(string charName, Vector3 pos, Color fallback)
         {
             var go = new GameObject(charName);
             go.transform.position = pos;
 
+            // Map Slime_1/Slime_2 to the single Slime sprite
+            string spriteName = charName.StartsWith("Slime") ? "Slime" : charName;
+            bool isEnemy = charName.StartsWith("Slime") || charName == "CrystalGuardian";
+            string folder  = isEnemy ? "Enemies" : "Characters";
             var sr = go.AddComponent<SpriteRenderer>();
-            sr.sprite       = CreatePlaceholderSprite(color);
+            sr.sprite       = LoadSprite($"Assets/Art/Sprites/{folder}/{spriteName}.png", fallback);
             sr.sortingOrder = 10;
             go.transform.localScale = new Vector3(1.5f, 2f, 1f);
         }
@@ -339,6 +343,27 @@ namespace HD2DRPG.Editor
             go.transform.position   = pos;
             go.transform.localScale = new Vector3(0.6f, 3f, 0.6f);
             SetColor(go, new Color(0.20f, 0.16f, 0.25f));
+        }
+
+        /// <summary>
+        /// Tries to load a generated PNG sprite from the AssetDatabase.
+        /// Falls back to a colored silhouette if the asset doesn't exist yet
+        /// (i.e. SpriteGenerator hasn't been run).
+        /// </summary>
+        static Sprite LoadSprite(string assetPath, Color fallback)
+        {
+            // Import the asset so Unity knows about it (no-op if already imported)
+            AssetDatabase.ImportAsset(assetPath, ImportAssetOptions.ForceSynchronousImport);
+            var tex = AssetDatabase.LoadAssetAtPath<Texture2D>(assetPath);
+            if (tex != null)
+            {
+                return Sprite.Create(tex,
+                    new Rect(0, 0, tex.width, tex.height),
+                    new Vector2(0.5f, 0f), 16f);
+            }
+            Debug.LogWarning($"[HD2DRPG] Sprite not found at {assetPath}. " +
+                             "Run Tools > HD2D RPG > Generate All Sprites first.");
+            return CreatePlaceholderSprite(fallback);
         }
 
         static Sprite CreatePlaceholderSprite(Color color)
