@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using System.IO;
+using System.Linq;
+using TMPro;
 
 namespace HD2DRPG.Editor
 {
@@ -70,7 +72,9 @@ namespace HD2DRPG.Editor
             playerGO.tag = "Player";
             playerGO.transform.position = new Vector3(0, 0.5f, 0);
             var sr = playerGO.AddComponent<SpriteRenderer>();
-            sr.sprite        = LoadSprite("Assets/Art/Sprites/Characters/Aurora.png", new Color(0.3f, 0.55f, 1f));
+            // Try the Miro portrait overworld slice first, fall back to generated sprite
+            sr.sprite = PortraitImporter.LoadCharacterSprite("Aurora", "_Overworld")
+                     ?? LoadSprite("Assets/Art/Sprites/Characters/Aurora.png", new Color(0.3f, 0.55f, 1f));
             sr.sortingOrder  = 10;
             var rb = playerGO.AddComponent<Rigidbody2D>();
             rb.gravityScale  = 0;
@@ -112,50 +116,136 @@ namespace HD2DRPG.Editor
             var npcComponents = npcContainer.GetComponentsInChildren<HubNPC>();
             hub.npcs = npcComponents;
 
-            // ── Canvas UI (dialogue panel placeholder) ───────────────────────
+            // ── Canvas UI — Octopath-style dialogue + party panel ────────────
             var canvasGO = new GameObject("Canvas");
             var canvas   = canvasGO.AddComponent<Canvas>();
             canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-            canvasGO.AddComponent<UnityEngine.UI.CanvasScaler>();
+            var scaler = canvasGO.AddComponent<UnityEngine.UI.CanvasScaler>();
+            scaler.uiScaleMode         = UnityEngine.UI.CanvasScaler.ScaleMode.ScaleWithScreenSize;
+            scaler.referenceResolution = new Vector2(1920, 1080);
             canvasGO.AddComponent<UnityEngine.UI.GraphicRaycaster>();
 
+            // ── Dialogue Panel ────────────────────────────────────────────────
+            // Outer panel — dark translucent bar at bottom
             var dialoguePanelGO = new GameObject("DialoguePanel");
             dialoguePanelGO.transform.SetParent(canvasGO.transform, false);
             var panelRect = dialoguePanelGO.AddComponent<RectTransform>();
-            panelRect.anchorMin = new Vector2(0, 0);
-            panelRect.anchorMax = new Vector2(1, 0.25f);
-            panelRect.offsetMin = new Vector2(20, 10);
-            panelRect.offsetMax = new Vector2(-20, 0);
+            panelRect.anchorMin = new Vector2(0f,    0f);
+            panelRect.anchorMax = new Vector2(1f,    0f);
+            panelRect.pivot     = new Vector2(0.5f,  0f);
+            panelRect.sizeDelta = new Vector2(0f, 220f);
+            panelRect.anchoredPosition = new Vector2(0, 10f);
             var panelImg = dialoguePanelGO.AddComponent<UnityEngine.UI.Image>();
-            panelImg.color = new Color(0.05f, 0.05f, 0.1f, 0.92f);
+            panelImg.color = new Color(0.04f, 0.04f, 0.10f, 0.93f);
             dialoguePanelGO.SetActive(false);
 
+            // Portrait frame — left side, slightly overlapping top edge
+            var portraitFrameGO = new GameObject("PortraitFrame");
+            portraitFrameGO.transform.SetParent(dialoguePanelGO.transform, false);
+            var pfRect = portraitFrameGO.AddComponent<RectTransform>();
+            pfRect.anchorMin        = new Vector2(0f,  1f);
+            pfRect.anchorMax        = new Vector2(0f,  1f);
+            pfRect.pivot            = new Vector2(0f,  0f);
+            pfRect.anchoredPosition = new Vector2(20f, 0f);
+            pfRect.sizeDelta        = new Vector2(170f, 210f);
+            var pfImg = portraitFrameGO.AddComponent<UnityEngine.UI.Image>();
+            pfImg.color = new Color(0.08f, 0.07f, 0.14f, 1f);
+
+            // Portrait image inside frame
+            var portraitImgGO = new GameObject("PortraitImage");
+            portraitImgGO.transform.SetParent(portraitFrameGO.transform, false);
+            var piRect = portraitImgGO.AddComponent<RectTransform>();
+            piRect.anchorMin  = new Vector2(0f, 0f);
+            piRect.anchorMax  = new Vector2(1f, 1f);
+            piRect.offsetMin  = new Vector2(4f, 4f);
+            piRect.offsetMax  = new Vector2(-4f, -4f);
+            var portraitImgComp = portraitImgGO.AddComponent<UnityEngine.UI.Image>();
+            portraitImgComp.preserveAspect = true;
+            // Default to Aurora portrait; changes at runtime when NPCs speak
+            var auroraPortrait = PortraitImporter.LoadCharacterSprite("Aurora", "_Portrait");
+            if (auroraPortrait != null) portraitImgComp.sprite = auroraPortrait;
+
+            // Text area — right of portrait
+            var textAreaGO = new GameObject("TextArea");
+            textAreaGO.transform.SetParent(dialoguePanelGO.transform, false);
+            var taRect = textAreaGO.AddComponent<RectTransform>();
+            taRect.anchorMin        = new Vector2(0f, 0f);
+            taRect.anchorMax        = new Vector2(1f, 1f);
+            taRect.offsetMin        = new Vector2(210f,  10f);
+            taRect.offsetMax        = new Vector2(-20f, -10f);
+
+            // Speaker name plate
+            var nameGO = new GameObject("SpeakerName");
+            nameGO.transform.SetParent(textAreaGO.transform, false);
+            var nameRect = nameGO.AddComponent<RectTransform>();
+            nameRect.anchorMin        = new Vector2(0f, 1f);
+            nameRect.anchorMax        = new Vector2(0.6f, 1f);
+            nameRect.pivot            = new Vector2(0f, 1f);
+            nameRect.anchoredPosition = new Vector2(0f, 0f);
+            nameRect.sizeDelta        = new Vector2(0f, 36f);
+            var nameBg = nameGO.AddComponent<UnityEngine.UI.Image>();
+            nameBg.color = new Color(0.10f, 0.08f, 0.20f, 0.95f);
+            var nameTMP = nameGO.AddComponent<TextMeshProUGUI>();
+            nameTMP.text      = "SPEAKER";
+            nameTMP.fontSize  = 22f;
+            nameTMP.fontStyle = FontStyles.Bold;
+            nameTMP.color     = new Color(1f, 0.92f, 0.70f, 1f); // warm gold
+            nameTMP.margin    = new Vector4(10f, 4f, 6f, 4f);
+            nameTMP.alignment = TextAlignmentOptions.MiddleLeft;
+
+            // Body text
+            var bodyGO = new GameObject("BodyText");
+            bodyGO.transform.SetParent(textAreaGO.transform, false);
+            var bodyRect = bodyGO.AddComponent<RectTransform>();
+            bodyRect.anchorMin  = new Vector2(0f, 0f);
+            bodyRect.anchorMax  = new Vector2(1f, 1f);
+            bodyRect.offsetMin  = new Vector2(0f,  10f);
+            bodyRect.offsetMax  = new Vector2(0f, -42f);
+            var bodyTMP = bodyGO.AddComponent<TextMeshProUGUI>();
+            bodyTMP.text      = "";
+            bodyTMP.fontSize  = 20f;
+            bodyTMP.color     = new Color(0.95f, 0.94f, 0.90f, 1f);
+            bodyTMP.margin    = new Vector4(8f, 6f, 8f, 6f);
+            bodyTMP.alignment = TextAlignmentOptions.TopLeft;
+            bodyTMP.enableWordWrapping = true;
+
+            // Advance indicator ▼
             var advanceIndicatorGO = new GameObject("AdvanceIndicator");
             advanceIndicatorGO.transform.SetParent(dialoguePanelGO.transform, false);
             var advRect = advanceIndicatorGO.AddComponent<RectTransform>();
-            advRect.anchorMin = new Vector2(0.95f, 0.05f);
-            advRect.anchorMax = new Vector2(1f,   0.4f);
-            advRect.offsetMin = Vector2.zero;
-            advRect.offsetMax = Vector2.zero;
+            advRect.anchorMin        = new Vector2(1f, 0f);
+            advRect.anchorMax        = new Vector2(1f, 0f);
+            advRect.pivot            = new Vector2(1f, 0f);
+            advRect.anchoredPosition = new Vector2(-16f, 14f);
+            advRect.sizeDelta        = new Vector2(28f, 28f);
+            var advTMP = advanceIndicatorGO.AddComponent<TextMeshProUGUI>();
+            advTMP.text      = "▼";
+            advTMP.fontSize  = 20f;
+            advTMP.color     = new Color(1f, 0.92f, 0.55f, 1f);
+            advTMP.alignment = TextAlignmentOptions.Center;
             advanceIndicatorGO.SetActive(false);
 
+            // ── Party panel (M key) ───────────────────────────────────────────
             var partyPanelGO = new GameObject("PartyPanel");
             partyPanelGO.transform.SetParent(canvasGO.transform, false);
             var partyRect = partyPanelGO.AddComponent<RectTransform>();
-            partyRect.anchorMin = new Vector2(0.3f, 0.1f);
-            partyRect.anchorMax = new Vector2(0.7f, 0.9f);
+            partyRect.anchorMin = new Vector2(0.25f, 0.08f);
+            partyRect.anchorMax = new Vector2(0.75f, 0.92f);
             partyRect.offsetMin = Vector2.zero;
             partyRect.offsetMax = Vector2.zero;
             var partyImg = partyPanelGO.AddComponent<UnityEngine.UI.Image>();
             partyImg.color = new Color(0.05f, 0.05f, 0.12f, 0.95f);
             partyPanelGO.SetActive(false);
 
-            // Wire DialogueUI
+            // ── Wire DialogueUI component ─────────────────────────────────────
             var dialogueUIGO = new GameObject("DialogueUI");
             dialogueUIGO.transform.SetParent(canvasGO.transform, false);
             var dui = dialogueUIGO.AddComponent<DialogueUI>();
-            dui.dialoguePanel     = dialoguePanelGO;
-            dui.advanceIndicator  = advanceIndicatorGO;
+            dui.dialoguePanel    = dialoguePanelGO;
+            dui.portraitImage    = portraitImgComp;
+            dui.speakerNameText  = nameTMP;
+            dui.bodyText         = bodyTMP;
+            dui.advanceIndicator = advanceIndicatorGO;
 
             hub.dialogueUI           = dui;
             hub.partyManagementPanel = partyPanelGO;
@@ -317,8 +407,11 @@ namespace HD2DRPG.Editor
             sr.sortingOrder = 10;
 
             var npc = go.AddComponent<HubNPC>();
-            npc.npcName      = npcName;
+            npc.npcName       = npcName;
             npc.dialogueLines = lines;
+            // NPCs don't have portrait sheets — portrait slot stays null,
+            // DialogueUI will leave the portrait panel showing whatever was last set
+            npc.portrait = null;
         }
 
         static void CreateBattleCharacter(string charName, Vector3 pos, Color fallback)
@@ -326,12 +419,23 @@ namespace HD2DRPG.Editor
             var go = new GameObject(charName);
             go.transform.position = pos;
 
-            // Map Slime_1/Slime_2 to the single Slime sprite
-            string spriteName = charName.StartsWith("Slime") ? "Slime" : charName;
-            bool isEnemy = charName.StartsWith("Slime") || charName == "CrystalGuardian";
-            string folder  = isEnemy ? "Enemies" : "Characters";
+            Sprite sprite = null;
+
+            // Aurora and Kael: use their battle stance slice from the Miro portrait sheet
+            if (charName == "Aurora" || charName == "Kael")
+                sprite = PortraitImporter.LoadCharacterSprite(charName, "_Battle");
+
+            // Slimes and other enemies: use generated sprite
+            if (sprite == null)
+            {
+                string spriteName = charName.StartsWith("Slime") ? "Slime" : charName;
+                bool isEnemy = charName.StartsWith("Slime") || charName == "CrystalGuardian";
+                string folder = isEnemy ? "Enemies" : "Characters";
+                sprite = LoadSprite($"Assets/Art/Sprites/{folder}/{spriteName}.png", fallback);
+            }
+
             var sr = go.AddComponent<SpriteRenderer>();
-            sr.sprite       = LoadSprite($"Assets/Art/Sprites/{folder}/{spriteName}.png", fallback);
+            sr.sprite       = sprite;
             sr.sortingOrder = 10;
             go.transform.localScale = new Vector3(1.5f, 2f, 1f);
         }
