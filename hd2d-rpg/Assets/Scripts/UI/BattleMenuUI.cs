@@ -49,7 +49,6 @@ namespace HD2DRPG
         // ── State ──
         PartyMember _activeMember;
         List<EnemyCombatState> _enemies;
-        int _selectedAction;
         int _selectedSkill;
         int _selectedEnemy;
         int _boostLevel;

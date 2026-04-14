@@ -191,7 +191,7 @@ namespace HD2DRPG.Editor
             nameTMP.fontStyle = FontStyles.Bold;
             nameTMP.color     = new Color(1f, 0.92f, 0.70f, 1f); // warm gold
             nameTMP.margin    = new Vector4(10f, 4f, 6f, 4f);
-            nameTMP.alignment = TextAlignmentOptions.MiddleLeft;
+            nameTMP.alignment = TextAlignmentOptions.MidlineLeft;
 
             // Body text
             var bodyGO = new GameObject("BodyText");
@@ -207,7 +207,7 @@ namespace HD2DRPG.Editor
             bodyTMP.color     = new Color(0.95f, 0.94f, 0.90f, 1f);
             bodyTMP.margin    = new Vector4(8f, 6f, 8f, 6f);
             bodyTMP.alignment = TextAlignmentOptions.TopLeft;
-            bodyTMP.enableWordWrapping = true;
+            bodyTMP.textWrappingMode = TextWrappingModes.Normal;
 
             // Advance indicator ▼
             var advanceIndicatorGO = new GameObject("AdvanceIndicator");
